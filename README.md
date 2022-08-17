@@ -1,6 +1,6 @@
 Current output of `cargo run`:
 
-```json
+```rust
 V3(
     InkProject {
         registry: PortableRegistry {

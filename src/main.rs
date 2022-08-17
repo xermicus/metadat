@@ -64,7 +64,6 @@ fn dummy_contract() -> ContractSpec {
             .args(vec![MessageParamSpec::new("foo".to_string())
                 .of_type(type_spec)
                 .done()])
-            .docs(Vec::new())
             .done()])
         .messages(vec![MessageSpec::from_label("get".to_string())
             .selector([37u8, 68u8, 74u8, 254u8])
