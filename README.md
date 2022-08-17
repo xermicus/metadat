@@ -1,3 +1,6 @@
+Current output of `cargo run`:
+
+```json
 V3(
     InkProject {
         registry: PortableRegistry {
@@ -211,3 +214,4 @@ V3(
         },
     },
 )
+```
