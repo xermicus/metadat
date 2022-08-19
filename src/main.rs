@@ -1,7 +1,7 @@
 use std::fs::read_to_string;
 
 use ink_metadata::{
-    layout::{EnumLayout, Layout, StructLayout},
+    layout::{CellLayout, EnumLayout, Layout, StructLayout},
     ConstructorSpec, ContractSpec, InkProject, MessageParamSpec, MessageSpec, MetadataVersioned,
     ReturnTypeSpec, TypeSpec,
 };
@@ -24,18 +24,6 @@ fn read() {
     println!("{}", serde_json::to_string_pretty(&metadata).unwrap());
 }
 
-fn clike_enum(key_ptr: &mut KeyPtr) -> Layout {
-    EnumLayout::new(
-        key_ptr.advance_by(1),
-        vec![
-            (0.into(), StructLayout::new(vec![])),
-            (1.into(), StructLayout::new(vec![])),
-            (2.into(), StructLayout::new(vec![])),
-        ],
-    )
-    .into()
-}
-
 fn runtime_meta_type() -> Type<MetaForm> {
     let mut fields: FieldsBuilder<NamedFields> = Fields::named();
     let custom_u32_id = 1;
@@ -53,6 +41,11 @@ fn runtime_meta_type() -> Type<MetaForm> {
     ty
 }
 
+fn custom_cell_layout(key_ptr: &mut KeyPtr) -> Layout {
+    let meta_type = MetaType::new_custom(456, runtime_meta_type);
+    CellLayout::new_from_ty(key_ptr.advance_by(1).into(), meta_type).into()
+}
+
 fn dummy_contract() -> ContractSpec {
     let meta_type = MetaType::new_custom(123, runtime_meta_type);
     let type_spec = <TypeSpec<MetaForm>>::new_from_ty(meta_type);
@@ -64,6 +57,7 @@ fn dummy_contract() -> ContractSpec {
             .args(vec![MessageParamSpec::new("foo".to_string())
                 .of_type(type_spec)
                 .done()])
+            .docs(Vec::new())
             .done()])
         .messages(vec![MessageSpec::from_label("get".to_string())
             .selector([37u8, 68u8, 74u8, 254u8])
@@ -79,7 +73,7 @@ fn dummy_contract() -> ContractSpec {
 }
 
 fn main() {
-    let layout = clike_enum(&mut KeyPtr::from(Key::from([0x00; 32])));
+    let layout = custom_cell_layout(&mut KeyPtr::from(Key::from([0x00; 32])));
     let spec = dummy_contract();
 
     let ink_project = InkProject::new(layout, spec);
