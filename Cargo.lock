@@ -72,18 +72,20 @@ dependencies = [
 [[package]]
 name = "ink_metadata"
 version = "4.0.0"
+source = "git+https://github.com/paritytech/ink?branch=cl/runtime-metadata#e557a38c24bc3caeae1f1848edca21e1cfde92e3"
 dependencies = [
  "derive_more",
  "impl-serde",
  "ink_prelude",
  "ink_primitives",
- "scale-info 2.1.2",
+ "scale-info 2.1.2 (git+https://github.com/paritytech/scale-info?branch=aj/custom-meta-types)",
  "serde",
 ]
 
 [[package]]
 name = "ink_prelude"
 version = "4.0.0"
+source = "git+https://github.com/paritytech/ink?branch=cl/runtime-metadata#e557a38c24bc3caeae1f1848edca21e1cfde92e3"
 dependencies = [
  "cfg-if",
 ]
@@ -91,6 +93,7 @@ dependencies = [
 [[package]]
 name = "ink_primitives"
 version = "4.0.0"
+source = "git+https://github.com/paritytech/ink?branch=cl/runtime-metadata#e557a38c24bc3caeae1f1848edca21e1cfde92e3"
 dependencies = [
  "cfg-if",
  "ink_prelude",
@@ -110,7 +113,7 @@ version = "0.1.0"
 dependencies = [
  "ink_metadata",
  "ink_primitives",
- "scale-info 2.1.2",
+ "scale-info 2.1.2 (git+https://github.com/paritytech/scale-info?branch=aj/custom-meta-types)",
  "serde",
  "serde_json",
 ]
@@ -191,18 +194,6 @@ checksum = "4501abdff3ae82a1c1b477a17252eb69cee9e66eb915c1abaa4f44d873df9f09"
 [[package]]
 name = "scale-info"
 version = "2.1.2"
-dependencies = [
- "bitvec",
- "cfg-if",
- "derive_more",
- "parity-scale-codec",
- "scale-info-derive 2.1.2",
- "serde",
-]
-
-[[package]]
-name = "scale-info"
-version = "2.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c46be926081c9f4dd5dd9b6f1d3e3229f2360bc6502dd8836f84a93b7c75e99a"
 dependencies = [
@@ -214,8 +205,23 @@ dependencies = [
 ]
 
 [[package]]
+name = "scale-info"
+version = "2.1.2"
+source = "git+https://github.com/paritytech/scale-info?branch=aj/custom-meta-types#7dfe55bd92b484ba41947e9d7caef87b24ff1741"
+dependencies = [
+ "bitvec",
+ "cfg-if",
+ "derive_more",
+ "parity-scale-codec",
+ "scale-info-derive 2.1.2 (git+https://github.com/paritytech/scale-info?branch=aj/custom-meta-types)",
+ "serde",
+]
+
+[[package]]
 name = "scale-info-derive"
 version = "2.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "50e334bb10a245e28e5fd755cabcafd96cfcd167c99ae63a46924ca8d8703a3c"
 dependencies = [
  "proc-macro-crate",
  "proc-macro2",
@@ -226,8 +232,7 @@ dependencies = [
 [[package]]
 name = "scale-info-derive"
 version = "2.1.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "50e334bb10a245e28e5fd755cabcafd96cfcd167c99ae63a46924ca8d8703a3c"
+source = "git+https://github.com/paritytech/scale-info?branch=aj/custom-meta-types#7dfe55bd92b484ba41947e9d7caef87b24ff1741"
 dependencies = [
  "proc-macro-crate",
  "proc-macro2",
